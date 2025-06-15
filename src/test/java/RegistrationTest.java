@@ -4,30 +4,28 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTest {
 
     @BeforeAll
-    static void beforeAll() {
+    static void testBrowseConfiguration() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
     }
 
     @Test
     void fillingAllFields() {
         open("/automation-practice-form");
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         $("#firstName").setValue("Johnny");
         $("#lastName").setValue("Silverhand");
         $("#userEmail").setValue("samurai23@nightcity.com");
         $("#userNumber").setValue("2023002077");
 
-//        Прокликиваем выбор пола
-        $("[for=gender-radio-3]").click();
-        $("[for=gender-radio-2]").click();
+//        Выбираем пол
         $("[for=gender-radio-1]").click();
 
 //        Выбор даты рождения
